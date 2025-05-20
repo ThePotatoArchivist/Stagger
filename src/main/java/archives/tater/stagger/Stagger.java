@@ -42,7 +42,7 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 			if (poiseComponent.isMax()) {
 				var blockingItem = player.getActiveItem();
 				if (blockingItem.isEmpty()) return;
-				player.getItemCooldownManager().set(blockingItem.getItem(), (int) player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH));
+				player.getItemCooldownManager().set(blockingItem.getItem(), (int) (20 * player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH)));
 				player.stopUsingItem();
 				player.getWorld().playSoundFromEntity(null, player, SoundEvents.ITEM_SHIELD_BREAK, player.getSoundCategory(), 1f, 1f);
 			}

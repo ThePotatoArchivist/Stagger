@@ -1,9 +1,0 @@
-{
-  "sources": [
-    {
-      "type": "directory",
-      "source": "stagger:gui/sprites",
-      "prefix": ""
-    }
-  ]
-}

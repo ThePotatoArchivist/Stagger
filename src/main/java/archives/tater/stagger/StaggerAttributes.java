@@ -3,6 +3,7 @@ package archives.tater.stagger;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttribute.Category;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -15,18 +16,18 @@ public class StaggerAttributes {
     }
 
     private static String playerAttr(String name) {
-        return Stagger.MOD_ID + ".player." + name;
+        return "attribute.name." + Stagger.MOD_ID + '.' + name;
     }
 
-    private static RegistryEntry<EntityAttribute> registerClamped(String name, double fallback, double min, double max) {
-        return register(name, new ClampedEntityAttribute(playerAttr(name), fallback, min, max).setTracked(true));
+    private static RegistryEntry<EntityAttribute> registerClamped(String name, double fallback, double min, double max, Category category) {
+        return register(name, new ClampedEntityAttribute(playerAttr(name), fallback, min, max).setTracked(true).setCategory(category));
     }
 
     // TODO make these values named constants
 
-    public static final RegistryEntry<EntityAttribute> MAX_POISE = registerClamped("max_poise", 20, 0, 100);
-    public static final RegistryEntry<EntityAttribute> POISE_RATE = registerClamped("poise_rate", 0.025, 0, 2);
-    public static final RegistryEntry<EntityAttribute> STAGGER_LENGTH = registerClamped("stagger_length", 5 * 20, 0, 10 * 20);
+    public static final RegistryEntry<EntityAttribute> MAX_POISE = registerClamped("max_poise", 20, 0, 100, Category.POSITIVE);
+    public static final RegistryEntry<EntityAttribute> POISE_RATE = registerClamped("poise_rate", 0.025, 0, 2, Category.POSITIVE);
+    public static final RegistryEntry<EntityAttribute> STAGGER_LENGTH = registerClamped("stagger_length", 5, 0, 10, Category.NEGATIVE);
 
     public static void addAttributes(DefaultAttributeContainer.Builder attributeBuilder) {
         attributeBuilder
