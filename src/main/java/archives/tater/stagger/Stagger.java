@@ -38,8 +38,8 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 		ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamageTaken, damageTaken, blocked) -> {
             if (!blocked || !(entity instanceof PlayerEntity player)) return;
 			var poiseComponent = PoiseComponent.KEY.get(player);
-			poiseComponent.changePoise(-max(baseDamageTaken - damageTaken, 0));
-			if (poiseComponent.getPoise() <= 0) {
+			poiseComponent.changeDamage(max(baseDamageTaken - damageTaken, 0));
+			if (poiseComponent.isMax()) {
 				var blockingItem = player.getActiveItem();
 				if (blockingItem.isEmpty()) return;
 				player.getItemCooldownManager().set(blockingItem.getItem(), (int) player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH));

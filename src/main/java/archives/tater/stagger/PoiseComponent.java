@@ -13,65 +13,64 @@ import static java.lang.Math.*;
 public class PoiseComponent implements AutoSyncedComponent, CommonTickingComponent {
     private final PlayerEntity player;
 
-    private float poise = 0;
-    private float lastPoise = 0;
+    private float damage = 0;
+    private float lastDamage = 0;
 
     public PoiseComponent(PlayerEntity player) {
         this.player = player;
     }
 
-    public float getPoise() {
-        return poise;
+    public float getDamage() {
+        return damage;
     }
 
-    public float getClientPoise(float tickDelta) {
-        return lastPoise + (poise - lastPoise) * tickDelta;
+    public float getClientDamage(float tickDelta) {
+        return lastDamage + (damage - lastDamage) * tickDelta;
     }
 
-    public float getClientPoiseProgress(float tickDelta) {
-        return getClientPoise(tickDelta) / getMaxPoise();
+    public float getClientDamageProgress(float tickDelta) {
+        return getClientDamage(tickDelta) / getMaxDamage();
     }
 
-    public void setPoise(float poise) {
-        this.poise = clamp(poise, 0, getMaxPoise());
+    public void setDamage(float damage) {
+        this.damage = clamp(damage, 0, getMaxDamage());
         KEY.sync(player);
     }
 
-    public void changePoise(float poiseChange) {
-        poise = clamp(poise + poiseChange, 0, getMaxPoise());
+    public void changeDamage(float damageChange) {
+        damage = clamp(damage + damageChange, 0, getMaxDamage());
         KEY.sync(player);
     }
 
-    public float getMaxPoise() {
+    public float getMaxDamage() {
         return (float) player.getAttributeValue(StaggerAttributes.MAX_POISE);
     }
 
     public boolean isMax() {
-        return poise >= getMaxPoise();
+        return damage >= getMaxDamage();
     }
 
-    public boolean isMaxClient() {
-        return lastPoise >= getMaxPoise();
+    public boolean isEmptyClient() {
+        return lastDamage <= 0;
     }
 
-    private static final String POISE_NBT = "poise";
+    private static final String DAMAGE_NBT = "damage";
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
-        poise = nbtCompound.getFloat(POISE_NBT);
+        damage = nbtCompound.getFloat(DAMAGE_NBT);
     }
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
-        nbtCompound.putFloat(POISE_NBT, poise);
+        nbtCompound.putFloat(DAMAGE_NBT, damage);
     }
 
     @Override
     public void tick() {
-        lastPoise = this.poise;
-        var maxPoise = getMaxPoise();
-        if (poise < maxPoise)
-            poise = min(maxPoise, poise + (float) player.getAttributeValue(StaggerAttributes.POISE_RATE));
+        lastDamage = this.damage;
+        if (damage > 0)
+            damage = max(0, damage - (float) player.getAttributeValue(StaggerAttributes.POISE_RATE));
     }
 
     public static final ComponentKey<PoiseComponent> KEY = ComponentRegistry.getOrCreate(Stagger.id("poise"), PoiseComponent.class);
