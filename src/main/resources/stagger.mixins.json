@@ -1,11 +1,12 @@
 {
-	"required": true,
-	"package": "archives.tater.stagger.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-      "PlayerEntityMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "archives.tater.stagger.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }
