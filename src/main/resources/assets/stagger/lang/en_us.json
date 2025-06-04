@@ -1,5 +1,6 @@
 {
   "attribute.name.stagger.max_poise": "Max Poise",
   "attribute.name.stagger.poise_rate": "Poise Recovery",
-  "attribute.name.stagger.stagger_length": "Stagger Duration"
+  "attribute.name.stagger.stagger_length": "Stagger Duration",
+  "attribute.name.stagger.poise_damage": "Poise Damage"
 }

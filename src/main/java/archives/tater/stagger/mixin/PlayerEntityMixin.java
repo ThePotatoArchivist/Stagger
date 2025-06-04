@@ -14,7 +14,7 @@ public abstract class PlayerEntityMixin {
 			at = @At("RETURN")
 	)
 	private static DefaultAttributeContainer.Builder addStaggerAttributes(DefaultAttributeContainer.Builder original) {
-		StaggerAttributes.addAttributes(original);
+		StaggerAttributes.addPlayerAttributes(original);
 		return original;
 	}
 }

@@ -2,6 +2,7 @@ package archives.tater.stagger;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -39,7 +40,7 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 			var damageBlocked = max(baseDamageTaken - damageTaken, 0);
             if (damageBlocked == 0 || !(entity instanceof PlayerEntity player)) return;
 			var poiseComponent = PoiseComponent.KEY.get(player);
-			poiseComponent.changeDamage(damageBlocked);
+			poiseComponent.changeDamage(damageBlocked * (source.getSource() instanceof LivingEntity livingEntity ? (float) livingEntity.getAttributeValue(StaggerAttributes.POISE_DAMAGE) : 1f));
 			if (poiseComponent.isMax()) {
 				var blockingItem = player.getActiveItem();
 				if (blockingItem.isEmpty()) return;
