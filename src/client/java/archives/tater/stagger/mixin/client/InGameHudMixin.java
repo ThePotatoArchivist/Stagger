@@ -18,7 +18,11 @@ public abstract class InGameHudMixin {
 	@Shadow @Final private MinecraftClient client;
 
 	@WrapWithCondition(
-			method = "renderMainHud",
+			method = {
+					"renderMainHud",
+					"maybeRenderExperienceBar" // weird Forge stuff for Sinytra
+			},
+			require = 0,
 			at = @At(value = "INVOKE",
 			target = "Lnet/minecraft/client/gui/hud/InGameHud;renderExperienceBar(Lnet/minecraft/client/gui/DrawContext;I)V")
 	)

@@ -3,8 +3,6 @@ package archives.tater.stagger.mixin;
 import archives.tater.stagger.StaggerAttributes;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,11 +28,11 @@ public class LivingEntityMixin {
         return 0;
     }
 
-    @WrapOperation(
+    @ModifyReturnValue(
             method = "disablesShield",
-            at = @At(value = "CONSTANT", args = "classValue=net/minecraft/item/AxeItem")
+            at = @At("RETURN")
     )
-    private boolean removeAxeShieldDisable(Object object, Operation<Boolean> original) {
+    private boolean removeAxeShieldDisable(boolean original) {
         return false;
     }
 }
