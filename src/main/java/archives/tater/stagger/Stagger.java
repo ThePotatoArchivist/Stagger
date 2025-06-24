@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.UseAction;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 import org.slf4j.Logger;
@@ -37,13 +38,14 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 		// Proceed with mild caution.
 		StaggerAttributes.register();
 		ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamageTaken, damageTaken, blocked) -> {
+			if (!blocked || !(entity instanceof PlayerEntity player)) return;
 			var damageBlocked = max(baseDamageTaken - damageTaken, 0);
-            if (damageBlocked == 0 || !(entity instanceof PlayerEntity player)) return;
+            if (damageBlocked == 0) return;
 			var poiseComponent = PoiseComponent.KEY.get(player);
 			poiseComponent.changeDamage(damageBlocked * (source.getSource() instanceof LivingEntity livingEntity ? (float) livingEntity.getAttributeValue(StaggerAttributes.POISE_DAMAGE) : 1f));
 			if (poiseComponent.isMax()) {
 				var blockingItem = player.getActiveItem();
-				if (blockingItem.isEmpty()) return;
+				if (blockingItem.isEmpty() || blockingItem.getUseAction() != UseAction.BLOCK) return;
 				player.getItemCooldownManager().set(blockingItem.getItem(), (int) (20 * player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH)));
 				player.stopUsingItem();
 				player.getWorld().playSoundFromEntity(null, player, SoundEvents.ITEM_SHIELD_BREAK, player.getSoundCategory(), 1f, 1f);
