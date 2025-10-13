@@ -3,7 +3,6 @@
   "package": "archives.tater.stagger.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AxeItemMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"
   ],
