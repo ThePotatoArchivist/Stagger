@@ -12,6 +12,8 @@ import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Paths;
+
 import static java.lang.Math.max;
 
 public class Stagger implements ModInitializer, EntityComponentInitializer {
@@ -25,6 +27,8 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static final StaggerConfig CONFIG = StaggerConfig.createToml(Paths.get("config"), "", MOD_ID, StaggerConfig.class);
 
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry entityComponentFactoryRegistry) {

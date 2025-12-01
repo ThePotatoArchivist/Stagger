@@ -26,9 +26,9 @@ public class StaggerAttributes {
 
     // TODO make these values named constants
 
-    public static final RegistryEntry<EntityAttribute> MAX_POISE = registerClamped("max_poise", 20, 0, 100, Category.POSITIVE);
-    public static final RegistryEntry<EntityAttribute> POISE_RATE = registerClamped("poise_rate", 0.025, 0, 2, Category.POSITIVE);
-    public static final RegistryEntry<EntityAttribute> STAGGER_LENGTH = registerClamped("stagger_length", 5, 0, 10, Category.NEGATIVE);
+    public static final RegistryEntry<EntityAttribute> MAX_POISE = registerClamped("max_poise", Stagger.CONFIG.baseMaxPoise, 0, 100, Category.POSITIVE);
+    public static final RegistryEntry<EntityAttribute> POISE_RATE = registerClamped("poise_rate", Stagger.CONFIG.basePoiseRate, 0, 2, Category.POSITIVE);
+    public static final RegistryEntry<EntityAttribute> STAGGER_LENGTH = registerClamped("stagger_length", Stagger.CONFIG.baseStaggerLength, 0, 10, Category.NEGATIVE);
     public static final RegistryEntry<EntityAttribute> POISE_DAMAGE = registerClamped("poise_damage", 1, 0, 4, Category.POSITIVE);
 
     public static final Identifier WEAPON_POISE_DAMAGE = Stagger.id("weapon_poise_damage");
