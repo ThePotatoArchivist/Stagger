@@ -1,5 +1,5 @@
 PROJECT=stagger-compat
-VERSION=1.0
+VERSION=1.1
 
 cd "$(basename $0)"
 mkdir build
