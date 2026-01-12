@@ -1,0 +1,35 @@
+{
+  "description": {
+    "translate": "enchantment.staggercompat.recovery",
+    "fallback": "Recovery"
+  },
+  "supported_items": "#staggercompat:enchantable/shield",
+  "weight": 2,
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 20
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "hand"
+  ],
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "attribute": "stagger:poise_rate",
+        "id": "staggercompat:recovery",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.25,
+          "per_level_above_first": 0.25
+        },
+        "operation": "add_multiplied_base"
+      }
+    ]
+  }
+}

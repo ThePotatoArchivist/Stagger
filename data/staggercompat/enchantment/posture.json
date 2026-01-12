@@ -1,0 +1,35 @@
+{
+  "description": {
+    "translate": "enchantment.staggercompat.posture",
+    "fallback": "Posture"
+  },
+  "supported_items": "#staggercompat:enchantable/shield",
+  "weight": 2,
+  "max_level": 3,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 9
+  },
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 9
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "hand"
+  ],
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "attribute": "stagger:max_poise",
+        "id": "staggercompat:posture",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 3,
+          "per_level_above_first": 3
+        },
+        "operation": "add_value"
+      }
+    ]
+  }
+}
