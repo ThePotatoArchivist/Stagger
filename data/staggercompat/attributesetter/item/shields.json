@@ -2,14 +2,14 @@
   "#enderscape:rubble_shields": [
     {
       "attribute": "stagger:max_poise",
-      "uuid": "00862f9a-5a31-4fd2-a0c7-28248c1f22f5",
+      "id": "stagger:base_max_poise",
       "value": -5,
       "operation": "ADDITION",
       "slot": "hand"
     },
     {
       "attribute": "stagger:poise_rate",
-      "uuid": "c0cf3329-93c5-4b73-b102-42f4b615e953",
+      "id": "stagger:base_poise_rate",
       "value": 0.4,
       "operation": "MULTIPLY_BASE",
       "slot": "hand"
@@ -18,14 +18,14 @@
   "harmonium:buckler": [
     {
       "attribute": "stagger:max_poise",
-      "uuid": "00862f9a-5a31-4fd2-a0c7-28248c1f22f5",
+      "id": "stagger:base_max_poise",
       "value": -8,
       "operation": "ADDITION",
       "slot": "hand"
     },
     {
       "attribute": "stagger:poise_rate",
-      "uuid": "c0cf3329-93c5-4b73-b102-42f4b615e953",
+      "id": "stagger:base_poise_rate",
       "value": 0.4,
       "operation": "MULTIPLY_BASE",
       "slot": "hand"
@@ -34,14 +34,14 @@
   "frontiers:cobalt_shield": [
     {
       "attribute": "stagger:max_poise",
-      "uuid": "00862f9a-5a31-4fd2-a0c7-28248c1f22f5",
+      "id": "stagger:base_max_poise",
       "value": 20,
       "operation": "ADDITION",
       "slot": "hand"
     },
     {
       "attribute": "stagger:poise_rate",
-      "uuid": "c0cf3329-93c5-4b73-b102-42f4b615e953",
+      "id": "stagger:base_poise_rate",
       "value": -0.5,
       "operation": "MULTIPLY_BASE",
       "slot": "hand"
