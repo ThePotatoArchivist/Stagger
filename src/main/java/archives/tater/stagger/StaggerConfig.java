@@ -19,4 +19,7 @@ public class StaggerConfig extends WrappedConfig {
     @ChangeWarning(Type.RequiresRestart)
     @FloatRange(min = 0, max = 10)
     public double baseStaggerLength = 5;
+
+    @IntegerRange(min = 0, max = 100)
+    public int parryWindow = 0;
 }
