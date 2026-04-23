@@ -16,12 +16,12 @@ public class StaggerAttributes {
         return Registry.registerReference(Registries.ATTRIBUTE, Stagger.id(path), attribute);
     }
 
-    private static String playerAttr(String name) {
+    private static String attributeName(String name) {
         return "attribute.name." + Stagger.MOD_ID + '.' + name;
     }
 
     private static RegistryEntry<EntityAttribute> registerClamped(String name, double fallback, double min, double max, Category category) {
-        return register(name, new ClampedEntityAttribute(playerAttr(name), fallback, min, max).setTracked(true).setCategory(category));
+        return register(name, new ClampedEntityAttribute(attributeName(name), fallback, min, max).setTracked(true).setCategory(category));
     }
 
     // TODO make these values named constants

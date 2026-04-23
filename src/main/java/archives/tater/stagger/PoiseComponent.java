@@ -43,7 +43,7 @@ public class PoiseComponent implements AutoSyncedComponent, CommonTickingCompone
     }
 
     public float getMaxDamage() {
-        return (float) player.getAttributeValue(StaggerAttributes.MAX_POISE);
+        return Stagger.CONFIG.maxHealthIsMaxPoise ? player.getMaxHealth() : (float) player.getAttributeValue(StaggerAttributes.MAX_POISE);
     }
 
     public boolean isMax() {
