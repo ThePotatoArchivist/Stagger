@@ -2,11 +2,15 @@ package archives.tater.stagger;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
+
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 import org.slf4j.Logger;
@@ -56,9 +60,20 @@ public class Stagger implements ModInitializer, EntityComponentInitializer {
 			if (poiseComponent.isMax()) {
 				var blockingItem = player.getActiveItem();
 				if (blockingItem.isEmpty() || blockingItem.getUseAction() != UseAction.BLOCK) return;
+
                 poiseComponent.setDamage(0);
-				player.getItemCooldownManager().set(blockingItem.getItem(), (int) (20 * player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH)));
+
+				var cooldown = (int) (20 * player.getAttributeValue(StaggerAttributes.STAGGER_LENGTH));
+				var itemCooldownManager = player.getItemCooldownManager();
+				itemCooldownManager.set(blockingItem.getItem(), cooldown);
+				if (CONFIG.cooldownAllShields)
+					Registries.ITEM.getEntryList(ConventionalItemTags.SHIELD_TOOLS).ifPresent(list -> {
+						for (var item : list)
+							itemCooldownManager.set(item.value(), cooldown);
+					});
+
 				player.stopUsingItem();
+
 				player.getWorld().playSoundFromEntity(null, player, SoundEvents.ITEM_SHIELD_BREAK, player.getSoundCategory(), 1f, 1f);
 			}
         });

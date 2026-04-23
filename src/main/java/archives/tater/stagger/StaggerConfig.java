@@ -13,6 +13,8 @@ public class StaggerConfig extends WrappedConfig {
     @ChangeWarning(value = Type.Custom, customMessage = "Must match between client & server")
     public boolean maxHealthIsMaxPoise = false;
 
+    public boolean cooldownAllShields = true;
+
     @ChangeWarning(Type.RequiresRestart)
     @IntegerRange(min = 0, max = 100)
     public int baseMaxPoise = 20;
